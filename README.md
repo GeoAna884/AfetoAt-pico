@@ -1,2 +1,3 @@
 # AfetoAt-pico
-site voltado para ajudar mães de crianças atípicas
+site
+para ajudar mães de crianças atípicas
