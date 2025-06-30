@@ -1,0 +1,99 @@
+// Criarei um arquivo principal: App.jsx
+export default function App() {
+  const [tab, setTab] = React.useState("entre-maes");
+  const [messages, setMessages] = React.useState([]);
+  const [input, setInput] = React.useState("");
+
+  const handleSend = () => {
+    if (input.trim() !== "") {
+      setMessages([...messages, input]);
+      setInput("");
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-pink-50 p-6">
+      <h1 className="text-3xl font-bold text-pink-700 mb-6">Apoio para Mães de Crianças Atípicas</h1>
+
+      <div className="flex gap-4 mb-6">
+        <button
+          onClick={() => setTab("entre-maes")}
+          className={`px-4 py-2 rounded-xl ${
+            tab === "entre-maes" ? "bg-pink-500 text-white" : "bg-pink-100 text-pink-700"
+          }`}
+        >
+          Entre Mães
+        </button>
+        <button
+          onClick={() => setTab("espaco-cuidado")}
+          className={`px-4 py-2 rounded-xl ${
+            tab === "espaco-cuidado" ? "bg-pink-500 text-white" : "bg-pink-100 text-pink-700"
+          }`}
+        >
+          Espaço do Cuidado
+        </button>
+        <button
+          onClick={() => setTab("direitos")}
+          className={`px-4 py-2 rounded-xl ${
+            tab === "direitos" ? "bg-pink-500 text-white" : "bg-pink-100 text-pink-700"
+          }`}
+        >
+          Direitos e Benefícios
+        </button>
+      </div>
+
+      {tab === "entre-maes" && (
+        <div className="bg-white p-4 rounded-xl shadow-md">
+          <h2 className="text-xl font-semibold mb-4">Converse com outras mães</h2>
+          <div className="h-60 overflow-y-auto border p-2 mb-4 rounded">
+            {messages.length === 0 ? (
+              <p className="text-gray-500">Nenhuma mensagem ainda. Seja a primeira a compartilhar!</p>
+            ) : (
+              messages.map((msg, idx) => (
+                <div key={idx} className="bg-pink-100 p-2 rounded my-1">{msg}</div>
+              ))
+            )}
+          </div>
+          <div className="flex gap-2">
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Digite sua mensagem..."
+              className="flex-1 border rounded p-2"
+            />
+            <button onClick={handleSend} className="bg-pink-500 text-white px-4 rounded">
+              Enviar
+            </button>
+          </div>
+        </div>
+      )}
+
+      {tab === "espaco-cuidado" && (
+        <div className="bg-white p-4 rounded-xl shadow-md">
+          <h2 className="text-xl font-semibold mb-4">Dicas de cuidado</h2>
+          <ul className="list-disc list-inside space-y-2">
+            <li>Identifique sinais antes das crises (ex.: irritabilidade, isolamento, sensibilidade).</li>
+            <li>Mantenha uma rotina previsível para reduzir ansiedade.</li>
+            <li>Prepare um "kit de conforto" (objetos ou brinquedos que acalmem).</li>
+            <li>Crie um espaço seguro e silencioso para a criança se acalmar.</li>
+            <li>Registre possíveis gatilhos em um caderno ou aplicativo.</li>
+          </ul>
+        </div>
+      )}
+
+      {tab === "direitos" && (
+        <div className="bg-white p-4 rounded-xl shadow-md">
+          <h2 className="text-xl font-semibold mb-4">Direitos e Benefícios</h2>
+          <ul className="list-disc list-inside space-y-2">
+            <li>Benefício de Prestação Continuada (BPC/LOAS) para crianças com deficiência.</li>
+            <li>Isenção de impostos na compra de veículos adaptados.</li>
+            <li>Prioridade em filas e atendimentos em serviços públicos.</li>
+            <li>Direito à acompanhante em atendimentos hospitalares e escolares.</li>
+            <li>Isenção de IPVA em alguns estados.</li>
+            <li>Auxílio-inclusão (caso a mãe precise reduzir jornada para cuidar).</li>
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
